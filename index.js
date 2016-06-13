@@ -46,7 +46,7 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-		    if (!kittenMessage(event.sender.id, event.message.text)) {
+		    if (!kittenMessage(event.sender.id, event.message.text) || !testChoice(event.sender.id, event.message.text)) {
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 		    }
 		} else if (event.postback) {
@@ -99,3 +99,37 @@ function kittenMessage(recipientId, text) {
     return false;
     
 };
+
+function testChoice(recipientId, text){
+	
+	if(text === 'Que puis-je faire'){
+		message ={
+		    "attachment":{
+		      "type":"template",
+		      "payload":{
+		        "template_type":"button",
+		        "text":"Que voulez-vous faire ?",
+		        "buttons":[
+		          {
+		            "type":"web_url",
+		            "url":"https://bouquetco.me",
+		            "title":"Allez sur le site"
+		          },
+		          {
+		            "type":"postback",
+		            "title":"Commencer à discuter",
+		            "payload":"USER_DEFINED_PAYLOAD"
+		          }
+		        ]
+		      }
+		    }
+		  };
+		sendMessage(recipientId, message);
+
+		return true;
+	}
+
+	return false;
+}
+
+  
