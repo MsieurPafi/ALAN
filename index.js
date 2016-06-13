@@ -101,7 +101,7 @@ function kittenMessage(recipientId, text) {
 };
 
 function testChoice(recipientId, text){
-	
+	text = text || "";
 	if(text === 'Que puis-je faire'){
 		message ={
 		    "attachment":{
