@@ -118,7 +118,7 @@ function testChoice(recipientId, text){
 		          {
 		            "type":"postback",
 		            "title":"Commencer à discuter",
-		            "payload":"USER_DEFINED_PAYLOAD"
+		            "payload":"User " + recipientId + " wants to discuss",
 		          }
 		        ]
 		      }
