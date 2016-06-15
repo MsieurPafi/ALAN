@@ -46,7 +46,7 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.message && event.message.text) {
-		    if (!kittenMessage(event.sender.id, event.message.text) && !testChoice(event.sender.id, event.message.text)) {
+		    if (!isThereAnAnswer) {
 		        sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
 		    }
 		} else if (event.postback) {
@@ -55,6 +55,18 @@ app.post('/webhook', function (req, res) {
     }
     res.sendStatus(200);
 });
+
+//function to test every other response function (to gain space in the handler)
+//add function to test after the last one with the right pattern
+function isThereAnAnswer(recipientId, text){
+	if (!kittenMessage(event.sender.id, event.message.text) 
+		&&
+		!testChoice(event.sender.id, event.message.text
+		)){
+			return true;
+	}
+	return false;
+}
 
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
