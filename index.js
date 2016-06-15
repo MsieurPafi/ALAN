@@ -51,7 +51,9 @@ app.post('/webhook', function (req, res) {
 		    }
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
-		}
+		}else if(i < 1){
+            welcomeMessage;
+        }
     }
     res.sendStatus(200);
 });
