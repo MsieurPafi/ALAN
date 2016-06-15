@@ -56,6 +56,15 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
 });
 
+//send welcome message
+function welcomeMessage(){
+    message = {
+        "text":"Welcome to My Company!",
+      }
+
+    sendMessage(event.sender.id, message);
+}
+
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
     
