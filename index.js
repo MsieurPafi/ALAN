@@ -51,21 +51,10 @@ app.post('/webhook', function (req, res) {
 		    }
 		} else if (event.postback) {
 		    console.log("Postback received: " + JSON.stringify(event.postback));
-		// }else if i < 1{
-  //           welcomeMessage;
-  //       }
+		}
     }
     res.sendStatus(200);
 });
-
-//send welcome message
-function welcomeMessage(){
-    message = {
-        "text":"Welcome to My Company!"
-      }
-
-    sendMessage(event.sender.id, message);
-}
 
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
