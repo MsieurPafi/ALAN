@@ -132,7 +132,12 @@ function testChoice(recipientId, text){
 		            "type":"postback",
 		            "title":"Commencer à discuter",
 		            "payload":"User " + recipientId + " wants to discuss",
-		          }
+		          },
+                  {
+                    "type":"postback",
+                    "title":"Tester les postback",
+                    "payload":"User " + recipientId + " wants to try postback calls",
+                  }
 		        ]
 		      }
 		    }
