@@ -52,7 +52,11 @@ app.post('/webhook', function (req, res) {
                 console.log("Message : ' " + JSON.stringify(event.message.text) + " ' echoed to user : " + event.sender.id);
 		    }
 		} else if (event.postback) {
-		    console.log("Postback received: " + JSON.stringify(event.postback));
+            var contentPostback = JSON.stringify(event.postback);
+		    console.log("Postback received: " + contentPostback);
+            if(contentPostback == "try Postback" ){
+                tryPostback(event.sender.id);
+            }
 		// }else if(i < 1){
   //           welcomeMessage;
         }
@@ -68,6 +72,39 @@ app.post('/webhook', function (req, res) {
 
 //     sendMessage(event.sender.id, message);
 // }
+
+//try postback calls
+function tryPostback(recipientId){
+
+    var mapUrl = "https://www.google.fr/maps/place/Sarthe/@48.0262663,-0.3261341,9z/data=!3m1!4b1!4m5!3m4!1s0x47e2896ea23f12bb:0x30d37521e092a00!8m2!3d47.9217014!4d0.1655803?hl=en";
+
+    message = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [{
+                            "title": "Map",
+                            "subtitle": "Une petite carte de la Sarthe",
+                            "image_url": mapUrl ,
+                            "buttons": [{
+                                "type": "web_url",
+                                "url": mapUrl,
+                                "title": "Afficher la carte"
+                                }, {
+                                "type": "postback",
+                                "title": "I like this",
+                                "payload": "User " + recipientId + " likes Sarthe",
+                            }]
+                        }]
+                    }
+                }
+            };
+
+    sendMessage(recipientId, message);
+
+    return true;
+}
 
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
@@ -136,7 +173,7 @@ function testChoice(recipientId, text){
                   {
                     "type":"postback",
                     "title":"Tester les postback",
-                    "payload":"User " + recipientId + " wants to try postback calls",
+                    "payload":"try Postback",
                   }
 		        ]
 		      }
