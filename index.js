@@ -61,13 +61,13 @@ app.post('/webhook', function (req, res) {
 });
 
 //send welcome message
-function welcomeMessage(){
-    message = {
-        "text":"Welcome to My Company!",
-      }
+// function welcomeMessage(){
+//     message = {
+//         "text":"Welcome to My Company!",
+//       }
 
-    sendMessage(event.sender.id, message);
-}
+//     sendMessage(event.sender.id, message);
+// }
 
 // send rich message with kitten
 function kittenMessage(recipientId, text) {
